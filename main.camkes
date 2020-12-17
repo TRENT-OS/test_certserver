@@ -1,0 +1,42 @@
+/* Copyright (C) 2020, Hensoldt Cyber GmbH */
+
+import "components/Tests/test_CertServer.camkes";
+
+#include "components/Tests/src/SharedCerts.h"
+
+#include "EntropySource/camkes/EntropySource.camkes"
+EntropySource_COMPONENT_DEFINE(EntropySource)
+
+#include "CertServer/camkes/CertServer.camkes"
+CertServer_COMPONENT_DEFINE(CertServer)
+
+assembly {
+    composition {
+        component test_CertServer   tester1;
+        component test_CertServer   tester2;
+        component EntropySource     entropySource;
+        component CertServer        certServer;
+
+        CertServer_INSTANCE_CONNECT(
+            certServer,
+            entropySource.entropy_rpc,  entropySource.entropy_port
+        )
+        CertServer_INSTANCE_CONNECT_CLIENTS(
+            certServer,
+            tester1.cert_rpc,           tester1.cert_port,
+            tester2.cert_rpc,           tester2.cert_port
+        )
+    }
+    configuration {
+        CertServer_CLIENT_ASSIGN_BADGES(
+            tester1.cert_rpc,
+            tester2.cert_rpc
+        )
+        CertServer_INSTANCE_CONFIGURE(
+            certServer,
+            2,
+            TEST_ROOT_CA_CERT,
+            TEST_IMED_CA_CERT
+        )
+    }
+}

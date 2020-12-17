@@ -1,0 +1,11 @@
+/* Copyright (C) 2020, Hensoldt Cyber GmbH */
+
+import <CertServer/camkes/if_CertServer.camkes>;
+
+component test_CertServer {
+    control;
+
+    // Connect to RPC of CertServer
+    uses        if_CertServer   cert_rpc;
+    dataport    Buf             cert_port;
+}
