@@ -12,8 +12,9 @@ CertServer_COMPONENT_DEFINE(CertServer)
 
 assembly {
     composition {
-        component test_CertServer   tester1;
-        component test_CertServer   tester2;
+        component test_CertServer1  tester1;
+        component test_CertServer2  tester2;
+        component test_CertServer3  tester3;
         component EntropySource     entropySource;
         component CertServer        certServer;
 
@@ -24,13 +25,15 @@ assembly {
         CertServer_INSTANCE_CONNECT_CLIENTS(
             certServer,
             tester1.cert_rpc,           tester1.cert_port,
-            tester2.cert_rpc,           tester2.cert_port
+            tester2.cert_rpc,           tester2.cert_port,
+            tester3.cert_rpc,           tester3.cert_port
         )
     }
     configuration {
         CertServer_CLIENT_ASSIGN_BADGES(
             tester1.cert_rpc,
-            tester2.cert_rpc
+            tester2.cert_rpc,
+            tester3.cert_rpc
         )
         CertServer_INSTANCE_CONFIGURE(
             certServer,

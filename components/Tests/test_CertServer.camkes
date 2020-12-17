@@ -2,7 +2,23 @@
 
 import <CertServer/camkes/if_CertServer.camkes>;
 
-component test_CertServer {
+component test_CertServer1 {
+    control;
+
+    // Connect to RPC of CertServer
+    uses        if_CertServer   cert_rpc;
+    dataport    Buf             cert_port;
+}
+
+component test_CertServer2 {
+    control;
+
+    // Connect to RPC of CertServer
+    uses        if_CertServer   cert_rpc;
+    dataport    Buf             cert_port;
+}
+
+component test_CertServer3 {
     control;
 
     // Connect to RPC of CertServer

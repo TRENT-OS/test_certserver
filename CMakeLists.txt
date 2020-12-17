@@ -1,5 +1,5 @@
 #
-# Test CertParser component
+# Test CertServer component
 #
 # Copyright (C) 2020, Hensoldt Cyber GmbH
 #
@@ -21,22 +21,48 @@ project(test_certserver C)
 CertServer_DeclareCAmkESComponent(
     CertServer
 )
+EntropySource_DeclareCAmkESComponent(
+    EntropySource
+)
 
 DeclareCAmkESComponent(
-    test_CertServer
+    test_CertServer1
     SOURCES
         components/Tests/src/test_CertServer.c
     C_FLAGS
         -Wall
         -Werror
+        -DCLIENT_ID=101
     LIBS
         os_core_api
         os_libs
         CertServer_client
 )
-
-EntropySource_DeclareCAmkESComponent(
-    EntropySource
+DeclareCAmkESComponent(
+    test_CertServer2
+    SOURCES
+        components/Tests/src/test_CertServer.c
+    C_FLAGS
+        -Wall
+        -Werror
+        -DCLIENT_ID=102
+    LIBS
+        os_core_api
+        os_libs
+        CertServer_client
+ )
+ DeclareCAmkESComponent(
+    test_CertServer3
+    SOURCES
+        components/Tests/src/test_CertServer.c
+    C_FLAGS
+        -Wall
+        -Werror
+        -DCLIENT_ID=103
+    LIBS
+        os_core_api
+        os_libs
+        CertServer_client
 )
 
 DeclareAndCreateCamkESSystem(main.camkes)
