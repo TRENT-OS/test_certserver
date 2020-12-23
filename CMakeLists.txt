@@ -35,7 +35,7 @@ DeclareCAmkESComponent(
         -DCLIENT_ID=101
     LIBS
         os_core_api
-        os_libs
+        lib_macros
         CertServer_client
 )
 DeclareCAmkESComponent(
@@ -48,7 +48,7 @@ DeclareCAmkESComponent(
         -DCLIENT_ID=102
     LIBS
         os_core_api
-        os_libs
+        lib_macros
         CertServer_client
  )
  DeclareCAmkESComponent(
@@ -61,7 +61,7 @@ DeclareCAmkESComponent(
         -DCLIENT_ID=103
     LIBS
         os_core_api
-        os_libs
+        lib_macros
         CertServer_client
 )
 
